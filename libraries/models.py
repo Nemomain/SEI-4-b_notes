@@ -6,5 +6,6 @@ class Library(models.Model):
   user_id = models.ForeignKey(
     to='users.User',
     on_delete =models.CASCADE,
-    related_name='libraries'
+    related_name='libraries',
+    null=True # this is important, otherwise user_id is required as a field in the request
   )

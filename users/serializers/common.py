@@ -11,7 +11,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     model = User
     fields =('id', 'name', 'email', 'password', 'password_confirmation')
 
-    def validate(self, data):
+  def validate(self, data):
       password = data.get('password')
       password_confirmation = data.pop('password_confirmation')
 
@@ -19,6 +19,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
         raise serializers.ValidationError('Passwords must match.')
       return data
     
-    def create(self, validated_data):
-      user = User.objects.create_user(**validated_data)
+  def create(self, validated_data):
+      username = validated_data.get('name')
+      user = User.objects.create_user(username, **validated_data)
       return user
+    
