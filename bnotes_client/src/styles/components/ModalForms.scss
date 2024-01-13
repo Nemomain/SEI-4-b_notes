@@ -1,0 +1,58 @@
+.form_modal{
+  @include flex(column, flex-start, center);
+  padding: 20px 42px 20px 20px;
+  background-color: $bg-color;
+  color: $font-color;
+}
+
+.disclaimer{
+  @include flex(column, center, center);
+  text-align: center;
+  padding: 10px 0 0 0;
+  background-color: $fhover;
+  color: $bg-color;
+}
+
+.form_modal{
+  @include flex(row, flex-start, center);
+}
+.exit, .submit{
+  border: 1px solid $bg-color;
+  background-color: $font-color;
+  color: $bg-color;
+  &:hover{
+    border: 1px solid $font-color;
+    background-color: $bg-color;
+    color: $font-color;
+  }
+}
+
+.exit{
+  border-radius: 20px;
+  padding: 0 9px 2px;
+}
+
+.form{
+  min-width: 350px;
+  @include flex(column, flex-start, center);
+  padding: 40px;
+}
+
+.textinput{
+  width: 100%;
+  margin: 10px 0;
+  background-color: $bg-color;
+  color: $font-color;
+  border: none;
+  box-shadow: 0 2px 0 $font-color;
+}
+
+.textinput::placeholder{
+  color: #b04949;
+}
+
+.submit{
+  margin-top: 10px;
+  padding: 3px 20px;
+  border-radius: 7px;
+}

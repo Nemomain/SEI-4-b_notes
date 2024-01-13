@@ -1,0 +1,14 @@
+.homemenu {
+  @include flex(column, center, center);
+  min-height: 80vh;
+}
+.logo{
+  font-size: 6em;
+  text-shadow: 0 8px #1207074d;
+}
+.homeselect {
+  font-size: 3em;
+  &:hover{
+    color: $fhover;
+  }
+}
