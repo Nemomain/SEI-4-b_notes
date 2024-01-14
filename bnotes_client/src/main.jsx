@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/:userId/',
-        element: <LibraryList /> //!create tomorrow LibraryList + loader
+        element: <LibraryList />
       }
     ]
   }

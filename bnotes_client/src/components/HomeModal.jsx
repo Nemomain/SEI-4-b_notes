@@ -57,7 +57,7 @@ export default function HomeModal({ show, setShow, option, setOption, userData, 
     if (option === 'Register' && parsedData.password !== parsedData.passwordConfirmation) {
       return setNoBueno('Password confirmation must match password')
     }
-    parsedData.usertype = parsedData.usertype === 'artist' ? 1 : 2
+    
     if (option === 'Register') {
       register(parsedData)
     } else if (option === 'Login') {
