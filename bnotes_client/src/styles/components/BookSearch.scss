@@ -1,0 +1,34 @@
+img, .fake_cover{
+  max-height: 150px;
+  max-width: 100px;
+  margin-right: 15px;
+}
+
+.fake_cover{
+  @include flex(column, center, center);
+  text-align: center;
+  height: 150px;
+  width: 100px;
+  background-color: lightgray;
+  color: darkgray;
+}
+
+.search_instance{
+  @include flex(column, center, flex-start);
+  border-radius: 10px;
+  width: 100%;
+  padding: 15px;
+  margin: 10px;
+  background-color: #db4c4c;
+  color: $bg-color;
+
+}
+
+.no_button{
+  @include flex(row, center, flex-start);
+  width: 100%;
+  border: solid 1px $bg-color;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}

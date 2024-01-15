@@ -7,7 +7,7 @@ export default function Header({ userData, setUserData }){
   const navigate = useNavigate()
 
   function toggleVisible(){
-    setVisible[!visible]
+    setVisible(!visible)
   }
 
   // user must be logged in

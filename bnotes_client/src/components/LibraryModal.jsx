@@ -15,8 +15,7 @@ export default function HomeModal({ list, setList, show, setShow, userData, setU
     e.preventDefault()
     const formData = new FormData(e.target)
     const parsedData = Object.fromEntries(formData.entries())
-    let created = {}
-    !parsedData.name ? setNoBueno('Your new Library needs a name!') : created = await libraryCreate(userData.token, parsedData)
+    !parsedData.name ? setNoBueno('Your new Library needs a name!') : await libraryCreate(userData.token, parsedData)
     setList('')
     setShow(false)
   }

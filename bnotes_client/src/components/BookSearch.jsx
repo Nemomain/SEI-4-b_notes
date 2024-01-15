@@ -1,0 +1,68 @@
+
+import { useOutletContext, useLoaderData, useNavigate } from "react-router-dom"
+
+import Header from "./Header"
+
+import { bookCreate } from "../utils/helpers/bookHelpers"
+
+
+export default function BookSearch(){
+
+  const [searchData, libraryId] = useLoaderData()
+
+  const data = useOutletContext()
+  const [ userData, setUserData ] = data
+
+  const navigate = useNavigate()
+
+  async function add(bookData){
+    const dataToSend = {
+      google_id: bookData[0],
+      name: bookData[1],
+      author: bookData[2],
+      cover: bookData[3],
+      libraries_id: [libraryId]
+    }
+    await bookCreate(userData.token, dataToSend)
+    navigate(`/${userData.id}/library/${libraryId}`)
+  }
+  
+  return (
+    <>
+      <Header userData={userData} setUserData={setUserData} />
+      <div className="wrapper">
+        <h2>Search Results</h2>
+        {searchData.items ?
+        searchData.items.map((book) => (
+          <section key={book.id} className="search_instance">
+            <div className="no_button">
+              {
+              book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ?
+              <img src={book.volumeInfo.imageLinks.smallThumbnail} alt={`Cover for ${book.volumeInfo.title} by ${book.volumeInfo.authors[0]}`} />
+              :
+              <div className="fake_cover">
+                <p>No cover available</p>
+              </div>
+              }
+              <div className="book_info">
+                <p>{`Title: ${book.volumeInfo.title}`}</p>
+                <p>{`Author: ${book.volumeInfo.authors[0]}`}</p>
+                <p>{`Description: ${book.volumeInfo.description ? book.volumeInfo.description : 'No description available'}`}</p>
+              </div>
+            </div>
+            <button onClick={() => {
+              add([book.id,
+              book.volumeInfo.title,
+              book.volumeInfo.authors[0],
+              book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? book.volumeInfo.imageLinks.smallThumbnail : 'Not Available'])}}
+              className="add_book">Add to Library
+            </button>
+          </section>
+        ))
+        :
+        <p>No Results</p>
+        }
+      </div>
+    </>
+  )
+}

@@ -5,6 +5,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 import Homepage from './components/Homepage.jsx'
 import LibraryList from './components/LibraryList.jsx'
+import SingleBook from './components/SingleBook.jsx'
+import SingleLibrary from './components/SingleLibrary.jsx'
+import BookSearch from './components/BookSearch.jsx'
+
+//loaders
+import { getSingleLibrary } from './utils/loaders/libraryLoader.js'
+import { googleCall } from './utils/helpers/googleHelper.js'
+import { getBookSingle } from './utils/helpers/bookHelpers.js'
 
 //Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,6 +30,21 @@ const router = createBrowserRouter([
       {
         path: '/:userId/',
         element: <LibraryList />
+      },
+      {
+        path: '/:userId/book/:bookId',
+        element: <SingleBook />,
+        loader: async ({ params }) => getBookSingle(params.bookId)
+      },
+      {
+        path: '/:userId/library/:libraryId',
+        element: <SingleLibrary />,
+        loader: async ({ params }) => getSingleLibrary(params.libraryId)
+      },
+      {
+        path: '/:userId/library/:libraryId/:search',
+        element: <BookSearch />,
+        loader: async ({ params }) => googleCall(params.libraryId, params.search),
       }
     ]
   }

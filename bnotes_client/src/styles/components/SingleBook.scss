@@ -1,0 +1,24 @@
+
+.sticky {
+  position: fixed;
+  top: 270px;      /* Adjust this value to set the distance from the top */
+  left: 100px;
+  width: 100%; /* Adjust the width as needed */
+  height: 50px; /* Set your predetermined height */
+  z-index: 1000; /* Set a high z-index to ensure it stays on top of other elements */
+}
+
+.row{
+  @include flex(row, center, space-between);
+  width: 100%;
+  padding: 15px;
+  margin: 10px;
+}
+
+.spacer{
+  width: 20%;
+}
+
+.notes_list{
+  width: 80%;
+}

@@ -7,7 +7,6 @@ export async function libraryLister(token) {
         Authorization: `Bearer ${token}`,
       },
     })
-    console.log(res)
     return res
   } catch (error) {
     console.log(error)
@@ -21,9 +20,9 @@ export async function libraryCreate(token, parsedData) {
         Authorization: `Bearer ${token}`,
       },
     })
-    console.log(res)
     return res
   } catch (error) {
     console.log(error)
   }
 }
+
