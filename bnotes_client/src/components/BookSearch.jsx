@@ -36,6 +36,7 @@ export default function BookSearch(){
         searchData.items.map((book) => (
           <section key={book.id} className="search_instance">
             <div className="no_button">
+              <div className="book_info">
               {
               book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ?
               <img src={book.volumeInfo.imageLinks.smallThumbnail} alt={`Cover for ${book.volumeInfo.title} by ${book.volumeInfo.authors[0]}`} />
@@ -44,11 +45,10 @@ export default function BookSearch(){
                 <p>No cover available</p>
               </div>
               }
-              <div className="book_info">
-                <p>{`Title: ${book.volumeInfo.title}`}</p>
-                <p>{`Author: ${book.volumeInfo.authors[0]}`}</p>
-                <p>{`Description: ${book.volumeInfo.description ? book.volumeInfo.description : 'No description available'}`}</p>
+                <p className="info_piece"><span className="bold">Title:</span> {`${book.volumeInfo.title}`}</p>
+                <p className="info_piece"><span className="bold">Author:</span> {`${book.volumeInfo.authors[0]}`}</p>
               </div>
+                <p className="info_piece"><span className="bold">Description:</span> {`${book.volumeInfo.description ? book.volumeInfo.description : 'No description available'}`}</p>
             </div>
             <button onClick={() => {
               add([book.id,

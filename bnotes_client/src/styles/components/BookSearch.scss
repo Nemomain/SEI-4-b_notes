@@ -25,10 +25,18 @@ img, .fake_cover{
 }
 
 .no_button{
-  @include flex(row, center, flex-start);
+  @include flex(column, center, flex-start);
   width: 100%;
   border: solid 1px $bg-color;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 15px;
+}
+
+.info_piece {
+  margin: 15px;
+}
+
+.bold{
+  font-weight: 800;
 }

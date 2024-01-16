@@ -12,7 +12,6 @@ export default function HomeModal({ show, setShow, option, setOption, userData, 
 
   async function login(parsedData) {
     try {
-      console.log(parsedData)
       const res = await axios.post('/api/users/login/', parsedData)
       //res.data.access is a JWT token
       const token = res.data.access

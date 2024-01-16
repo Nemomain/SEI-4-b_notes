@@ -10,9 +10,15 @@ export default function Header({ userData, setUserData }){
     setVisible(!visible)
   }
 
+  function logOut(){
+    setUserData('')
+    sessionStorage.clear()
+    navigate('/')
+  }
+
   // user must be logged in
   useEffect(() => {
-    if (!sessionStorage.getItem('data')) {
+    if (!JSON.parse(sessionStorage.getItem('data')) ) {
       navigate('/')
     }
   }, [])
@@ -24,9 +30,9 @@ export default function Header({ userData, setUserData }){
         <Navbar.Toggle aria-controls="basic-navbar-nav" style={{borderColor: '#682B2B'}} onClick={toggleVisible} />
         <Navbar.Collapse className={visible ? 'show' : ''}>
           <Nav style={{ marginLeft: 'auto' }}>
-            <Nav.Link style={{color: '#682B2B', marginLeft: 'auto'}} href={`/${userData.id}`}>Libraries</Nav.Link>
+            <Nav.Link style={{color: '#682B2B', marginLeft: 'auto'}} href={`/${userData.id}/`}>Libraries</Nav.Link>
             <Nav.Link style={{color: '#682B2B', marginLeft: 'auto'}} href="#">About</Nav.Link>
-            <Nav.Link style={{color: '#682B2B', marginLeft: 'auto'}} href="#">Log Out</Nav.Link>
+            <Nav.Link style={{color: '#682B2B', marginLeft: 'auto'}} onClick={logOut}>Log Out</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

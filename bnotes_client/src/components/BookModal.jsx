@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 export default function BookModal({ showBookModal, setShowBookModal, userData, bookToLibrary}) {
   const [ noBueno, setNoBueno ] = useState('')
   //states for camp select
-  const [author, setAuthor] = useState(false)
+  const [author, setAuthor] = useState(true)
   const [title, setTitle] = useState(false)
   //state to define query parameters
 
@@ -21,7 +21,7 @@ export default function BookModal({ showBookModal, setShowBookModal, userData, b
     let str = ''
     //constructor of the string for google query
     Object.entries(parsedData).forEach(([key, value]) => {
-      str += `${key}:${value.replace(/ /g, '%20')}+`
+      if (value) str += `${key}:${value.replace(/ /g, '%20')}+`
     })
     str = str.substring(0, str.length - 1);
     navigate(`/${userData.id}/library/${bookToLibrary}/${str}/`)

@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import Modal from 'react-bootstrap/Modal'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { noteCreate } from '../utils/helpers/noteHelpers'
+import { notePatch } from '../utils/helpers/noteHelpers'
 
-export default function DynamicNoteModal({ showNoteModal, setShowNoteModal, userData, noteToBook }){
+export default function DynamicNoteModal({ noteToMod, whichField, fieldValue, show, setShow, userData, noteToBook }){
   const [ noBueno, setNoBueno ] = useState('')
 
   const navigate = useNavigate()
@@ -16,7 +17,7 @@ export default function DynamicNoteModal({ showNoteModal, setShowNoteModal, user
       const formData = new FormData(e.target)
       const parsedData = Object.fromEntries(formData.entries())
       console.log(parsedData)
-      await noteCreate(userData.id, parsedData)
+      await notePatch(noteToMod, userData.token, parsedData)
       navigate(`/${userData.id}/book/${noteToBook}/`)
     } catch (error) {
       console.log(error)
@@ -25,11 +26,11 @@ export default function DynamicNoteModal({ showNoteModal, setShowNoteModal, user
 
   function exit(){
     setNoBueno('')
-    setShowNoteModal(false)
+    setShow(false)
   }
 
   return (
-    <Modal centered show={showNoteModal}>
+    <Modal centered show={show}>
       <div className="outer_modal">
         {noBueno && <div className="disclaimer"><p>{noBueno}</p></div>}
         <div className="form_modal">
@@ -37,16 +38,22 @@ export default function DynamicNoteModal({ showNoteModal, setShowNoteModal, user
           <div>
             {
               <form className="form" action="" onSubmit={(e) => validate(e)}>
-                <input className="textinput" type="text" name="title" placeholder="Note Title" />
+                {whichField == 'title' ?
                 <label>
-                  Write your note:
+                  Edit your note title:
+                  <input className="textinput" type="text" name="title" defaultValue={fieldValue} />
+                </label>
+                :
+                <label>
+                  Edit your note:
                   <textarea
                     name="text"
                     rows={12}
                     cols={37}
-                  />
+                    defaultValue={fieldValue}
+                    />
                 </label>
-                <input type="hidden" name="book" value={noteToBook} />
+                }
                 <input className="submit" type="submit" value="Ok" />
               </form>
             }
