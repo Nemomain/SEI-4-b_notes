@@ -24,15 +24,15 @@ export default function Header({ userData, setUserData }){
   }, [])
 
   return (
-    <header>
-      <Navbar className="pe-5 ps-5" expand="lg" style={{padding: '40px 0'}}>
+    <header className="head">
+      <Navbar className="pe-5 ps-5" expand="lg" style={{padding: '40px 0', width: '100%', margin: 'auto', maxWidth: '1200px'}}>
         <h1 id='nav_title' style={{fontSize: 70}}>b_notes</h1>
         <Navbar.Toggle aria-controls="basic-navbar-nav" style={{borderColor: '#682B2B'}} onClick={toggleVisible} />
         <Navbar.Collapse className={visible ? 'show' : ''}>
           <Nav style={{ marginLeft: 'auto' }}>
-            <Nav.Link style={{color: '#682B2B', marginLeft: 'auto'}} href={`/${userData.id}/`}>Libraries</Nav.Link>
-            <Nav.Link style={{color: '#682B2B', marginLeft: 'auto'}} href="#">About</Nav.Link>
-            <Nav.Link style={{color: '#682B2B', marginLeft: 'auto'}} onClick={logOut}>Log Out</Nav.Link>
+            <Nav.Link className='nav_link' style={{color: '#682B2B', marginLeft: 'auto'}} href={`/${userData.id}/`}>Libraries</Nav.Link>
+            <Nav.Link className='nav_link' style={{color: '#682B2B', marginLeft: 'auto'}} href="/about/">About</Nav.Link>
+            <Nav.Link className='nav_link' style={{color: '#682B2B', marginLeft: 'auto'}} onClick={logOut}>Log Out</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

@@ -12,10 +12,29 @@ body {
   color: $font-color;
 }
 
+.reg_confirm{
+  background-color: rgb(159, 230, 159);
+  border-radius: 5px;
+  width: 300px;
+  height: 100px;
+  @include flex(row, center, center);
+  text-align: center;
+  color: $font-color;
+  margin: 30px;
+}
+
 .hidden {
   display: none;
 }
 
 #nav_title{
-  text-shadow: 0 4px 0 #1207074d;
+  text-shadow: 0 5px 0 #1207074d;
+}
+
+.head{
+  @include flex(row, center, center);
+}
+
+.nav_link{
+  font-size: 1.5em;
 }

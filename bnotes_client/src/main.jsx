@@ -8,6 +8,7 @@ import LibraryList from './components/LibraryList.jsx'
 import SingleBook from './components/SingleBook.jsx'
 import SingleLibrary from './components/SingleLibrary.jsx'
 import BookSearch from './components/BookSearch.jsx'
+import About from './components/About.jsx'
 
 //loaders
 import { getSingleLibrary } from './utils/loaders/libraryLoader.js'
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Homepage />
+      },
+      {
+        path: '/about/',
+        element: <About />
       },
       {
         path: '/:userId/',

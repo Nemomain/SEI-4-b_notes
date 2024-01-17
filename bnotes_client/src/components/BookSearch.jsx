@@ -32,36 +32,38 @@ export default function BookSearch(){
       <Header userData={userData} setUserData={setUserData} />
       <div className="wrapper">
         <h2>Search Results</h2>
-        {searchData.items ?
-        searchData.items.map((book) => (
-          <section key={book.id} className="search_instance">
-            <div className="no_button">
-              <div className="book_info">
-              {
-              book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ?
-              <img src={book.volumeInfo.imageLinks.smallThumbnail} alt={`Cover for ${book.volumeInfo.title} by ${book.volumeInfo.authors[0]}`} />
-              :
-              <div className="fake_cover">
-                <p>No cover available</p>
+        <div className="search_wrapper">
+          {searchData.items ?
+          searchData.items.map((book) => (
+            <section key={book.id} className="search_instance">
+              <div className="no_button">
+                <div className="book_display">
+                {
+                book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ?
+                <img className="invis_small" src={book.volumeInfo.imageLinks.smallThumbnail} alt={`Cover for ${book.volumeInfo.title} by ${book.volumeInfo.authors[0]}`} />
+                :
+                <div className="fake_cover invis_small">
+                  <p>No cover available</p>
+                </div>
+                }
+                  <p className="info_piece"><span className="bold">Title:</span> {`${book.volumeInfo.title}`}</p>
+                  <p className="info_piece"><span className="bold">Author:</span> {`${book.volumeInfo.authors[0]}`}</p>
+                </div>
+                  <p className="info_piece description"><span className="bold">Description:</span> {`${book.volumeInfo.description ? book.volumeInfo.description : 'No description available'}`}</p>
               </div>
-              }
-                <p className="info_piece"><span className="bold">Title:</span> {`${book.volumeInfo.title}`}</p>
-                <p className="info_piece"><span className="bold">Author:</span> {`${book.volumeInfo.authors[0]}`}</p>
-              </div>
-                <p className="info_piece"><span className="bold">Description:</span> {`${book.volumeInfo.description ? book.volumeInfo.description : 'No description available'}`}</p>
-            </div>
-            <button onClick={() => {
-              add([book.id,
-              book.volumeInfo.title,
-              book.volumeInfo.authors[0],
-              book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? book.volumeInfo.imageLinks.smallThumbnail : 'Not Available'])}}
-              className="add_book">Add to Library
-            </button>
-          </section>
-        ))
-        :
-        <p>No Results</p>
-        }
+              <button onClick={() => {
+                add([book.id,
+                book.volumeInfo.title,
+                book.volumeInfo.authors[0],
+                book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail ? book.volumeInfo.imageLinks.smallThumbnail : 'Not Available'])}}
+                className="add_book">Add to Library
+              </button>
+            </section>
+          ))
+          :
+          <p>No Results</p>
+          }
+        </div>
       </div>
     </>
   )

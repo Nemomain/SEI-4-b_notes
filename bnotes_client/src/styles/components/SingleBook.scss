@@ -1,6 +1,11 @@
 
 .book_hero{
-  @include flex(row, center, center);
+  @include flex(column, center, center);
+}
+
+.book_hero h2{
+  margin-top: 20px;
+  text-align: center
 }
 
 .row{
@@ -15,21 +20,25 @@
 }
 
 .note_instance{
-  border: 1px solid $font-color;
+  @include flex(column, center, center);
+  border: 1px solid $fhover;
   border-radius: 10px;
   margin: 15px 0;
 }
 
 .note_title{
   @include flex(row, center, space-between);
+  width: 100%;
   border-radius: 9px 9px 0 0;
-  background-color: $font-color;
+  background-color: $fhover;
   color: $bg-color;
   padding: 5px 15px;
+  font-weight: 800;
 }
 
 .note_text{
   @include flex(row, flex-start, space-between);
+  width: 100%;
   padding: 15px 15px;
 }
 
@@ -54,11 +63,55 @@
   background-color: $bg-color;
   color: $font-color;
   border: 1px solid $font-color;
-  margin: px 0;
   border-radius: 4px;
   &:hover{
     border: 1px solid $bg-color;
     background-color: $font-color;
     color: $bg-color;
   }
+}
+
+.delete-note{
+  background-color: red;
+  color: white;
+  border: 1px solid red;
+  border-radius: 4px;
+  &:hover{
+    border: 1px solid red;
+    background-color: white;
+    color: red;
+    box-shadow: 0 0 7px 5px red;
+  }
+}
+
+.note_buttons{
+  @include flex(row, center, space-around);
+  width: 100%;
+  padding: 20px;
+  background-color: rgb(211, 157, 157);
+  border-radius: 0 0 9px 9px;
+}
+
+
+@media screen and (min-width: 767px){
+
+  .row{
+    @include flex(column, center, center);
+  }
+
+  .book_hero{
+    @include flex(row, center, center);
+    margin-bottom: 50px;
+  }
+
+  .notes_list{
+    width: 100%;
+    max-width: 1000px;
+    @include flex(column, center, center);
+  }
+
+  .note_instance{
+    width: 100%;
+  }
+
 }

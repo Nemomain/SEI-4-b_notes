@@ -9,14 +9,20 @@ import { bookLibraryList } from '../utils/helpers/bookHelpers'
 import Header from './Header'
 import LibraryModal from './LibraryModal'
 import BookModal from './BookModal'
+import RenameLibraryModal from './RenameLibraryModal'
 
 export default function LibraryList(){
   // List is meant to be the list of libraries to be rendered
   const [list, setList] = useState('')
   // show is to control the visibility of the Library modal
   const [show, setShow] = useState(false)
+  // States for adding books
   const [showBookModal, setShowBookModal] = useState(false)
   const [bookToLibrary, setBookToLibrary] = useState('')
+  // States for renaming Library
+  const [showRenameModal, setShowRenameModal] = useState(false)
+  const [actualLibraryName, setActualLibraryName] = useState('')
+  // For book counting in the sections
   const [bookCounting, setBookCounting] = useState([])
 
   const data = useOutletContext()
@@ -32,6 +38,13 @@ export default function LibraryList(){
       setBookToLibrary(option)
       setShowBookModal(!showBookModal)
     }
+  }
+
+  function openRename(name, id){
+    setActualLibraryName(name)
+    // bookToLibrary always represents a Library Id so I reuse it
+    setBookToLibrary(id)
+    setShowRenameModal(true)
   }
 
   async function bookCount(libraryId){
@@ -63,22 +76,26 @@ export default function LibraryList(){
       <div className="wrapper">
         <h2>Your Libraries</h2>
         <button className="add_lib" onClick={() => openModal('lib')}>New Library</button>
+        <RenameLibraryModal showRenameModal={showRenameModal} setShowRenameModal={setShowRenameModal} actualLibraryName={actualLibraryName} bookToLibrary={bookToLibrary} userData={userData} />
         <LibraryModal list={list} setList={setList} show={show} setShow={setShow} userData={userData} setUserData={setUserData} />
         <BookModal showBookModal={showBookModal} setShowBookModal={setShowBookModal} userData={userData} bookToLibrary={bookToLibrary} />
-        {list ?
-        list.data.map((lib, run) => (
-          <section className="library_instance" key={lib.id}>
-            <div className="lib_info" onClick={() => navigate(`/${userData.id}/library/${lib.id}/`)}>
-              <h3 className="lib_name">{lib.name} ({bookCounting.length > 0 ? bookCounting[run] : '0'} books)</h3>
-            </div>
-            <div className="lib_buttons">
-              <button className="add_book" onClick={() => openModal(lib.id)}>Add Book</button>
-            </div>
-          </section>
-        ))
-        :
-        <p>No libraries yet</p>
-        }
+        <div className='listing'>
+          {list ?
+          list.data.map((lib, run) => (
+            <section className="library_instance" key={lib.id}>
+              <div className="lib_info" onClick={() => navigate(`/${userData.id}/library/${lib.id}/`)}>
+                <h3 className="lib_name">{lib.name} ({bookCounting.length > 0 ? bookCounting[run] : '0'} books)</h3>
+              </div>
+              <div className="lib_buttons">
+                <button className="add_book" onClick={() => openModal(lib.id)}>Add Book</button>
+                <button className="add_book" onClick={() => openRename(lib.name, lib.id)}>Rename</button>
+              </div>
+            </section>
+          ))
+          :
+          <p>No libraries yet</p>
+          }
+        </div>
       </div>
     </>
   )

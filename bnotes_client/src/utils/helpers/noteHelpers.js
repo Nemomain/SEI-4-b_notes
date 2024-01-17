@@ -43,3 +43,17 @@ export async function notePatch(noteToMod, token, parsedData) {
     console.log(error)
   }
 }
+
+//! DELETE note
+export async function noteDestroy(id, token) {
+  try {
+    const res = await axios.delete(`/api/notes/${id}/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}

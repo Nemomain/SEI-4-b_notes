@@ -13,12 +13,19 @@ export default function HomeModal({ show, setShow, option, setOption, userData, 
   async function login(parsedData) {
     try {
       const res = await axios.post('/api/users/login/', parsedData)
-      //res.data.access is a JWT token
-      const token = res.data.access
-      // decode token
-      const decoded = jwtDecode(token)
-      setUserData({id: decoded.user_id, token: token})
-      navigate(`/${decoded.user_id}`)//want to decode JWT to find user id to include in navigate
+      if (res.status != 200) {
+        setNoBueno('Something went wrong. Check your credentials.')
+      } else {
+        //res.data.access is a JWT token
+        const token = res.data.access
+        // decode token
+        const decoded = jwtDecode(token)
+        setUserData({id: decoded.user_id, token: token}) 
+        sessionStorage.setItem('data', JSON.stringify(userData))
+        setTimeout(() => { // Timeout is needed because if sessionStorage is not properly set, user is immediately taken to url ('/') by useEffect in component Header
+          navigate(`/${decoded.user_id}`) //want to decode JWT to find user id to include in navigate
+        }, 200)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -26,8 +33,8 @@ export default function HomeModal({ show, setShow, option, setOption, userData, 
 
   async function register(parsedData) {
     try {
-      await axios.post('/api/users/register/', parsedData)
-      setOption('Login')
+      const res = await axios.post('/api/users/register/', parsedData)
+      res.status === 201 ? setOption('Confirmation') : setNoBueno('Something went wrong. Try using a different username/email.')
     } catch (error) {
       console.log(error)
     }
@@ -52,8 +59,9 @@ export default function HomeModal({ show, setShow, option, setOption, userData, 
     } else {
       setNoBueno('')
     }
+
     // Client side authentication
-    if (option === 'Register' && parsedData.password !== parsedData.passwordConfirmation) {
+    if (option === 'Register' && parsedData.password !== parsedData.password_confirmation) {
       return setNoBueno('Password confirmation must match password')
     }
     
@@ -91,6 +99,8 @@ export default function HomeModal({ show, setShow, option, setOption, userData, 
                 <input className="textinput" type="password" name="password_confirmation" placeholder="Confirm Password" />
                 <input className="submit" type="submit" value="Ok" />
               </form>
+              : option === "Confirmation" ?
+              <section className="reg_confirm">Registration Successful!</section>
               :
               () => setShow(false)
             }

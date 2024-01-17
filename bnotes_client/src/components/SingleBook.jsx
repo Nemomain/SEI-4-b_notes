@@ -1,18 +1,21 @@
 
-import { useEffect, useState } from "react"
-import { useLoaderData, useOutletContext } from "react-router-dom"
+import { useState } from "react"
+import { useLoaderData, useOutletContext, useNavigate } from "react-router-dom"
 
 import Header from "./Header"
 import DynamicNoteModal from "./DynamicNoteModal"
 
+import { noteDestroy } from "../utils/helpers/noteHelpers"
 
-export default function SingleBook(){ //! Y Not Loading the notes??
+
+export default function SingleBook(){
 
   const bookData = useLoaderData()
-  console.log(bookData)
 
   const data = useOutletContext()
   const [ userData, setUserData ] = data
+
+  const navigate = useNavigate()
 
   const [show, setShow] = useState(false)
   const [whichField, setWhichField] =useState('')
@@ -25,6 +28,15 @@ export default function SingleBook(){ //! Y Not Loading the notes??
     setWhichField(which)
     setFieldValue(what)
     setShow(!show)
+  }
+
+  async function deleteNote(id) {
+    try {
+      await noteDestroy(id, userData.token)
+      navigate(`/${userData.id}/book/${bookData.id}`)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 
@@ -45,10 +57,12 @@ export default function SingleBook(){ //! Y Not Loading the notes??
                 <div className="note_title">
                   <p className="note_p">{note.title}</p>
                   <button className="edit_title" onClick={() => openModal(note.id, 'title', note.title)}>Edit</button>
-                  {/* <img src="/assets/b_logo.png" alt="" /> */}
                 </div>
                 <div className="note_text">
                   <p>{note.text}</p>
+                </div>
+                <div className="note_buttons">
+                  <button className="delete-note" onClick={() => deleteNote(note.id)}>Delete Note</button>
                   <button className="edit_text" onClick={() => openModal(note.id, 'text', note.text)}>Edit</button>
                 </div>
               </section>

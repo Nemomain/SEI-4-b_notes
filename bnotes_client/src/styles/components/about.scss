@@ -1,0 +1,45 @@
+
+#unlogged_header{
+  @include flex(row, center, center);
+}
+
+#unlogged_header div{
+  @include flex(row, center, space-between);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 20px;
+}
+
+#unlogged_title{
+  text-shadow: 0 5px 0 #1207074d;
+  font-size: 70px;
+}
+
+.go_back{
+  font-size: 1.5em;
+}
+
+.about_section{
+  @include flex(column, center, center);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 30px;
+  padding-top: 50px
+}
+
+.elevator-pitch{
+  @include flex(column, center, center);
+  text-align: justify;
+  max-width: 1200px;
+}
+
+.paragraph{
+  max-width: 100%;
+  width: 100%;
+}
+.about_logos{
+  @include flex(row, center, space-between);
+  padding-top: 50px;
+  width: 100%;
+  max-width: 400px;
+}

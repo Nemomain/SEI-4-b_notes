@@ -1,9 +1,40 @@
 .book_instance, .book_info{
-  @include flex(row, center, space-between);
   border-radius: 10px;
   width: 100%;
   padding: 15px;
   margin: 10px;
   background-color: #db4c4c;
   color: $bg-color;
+}
+
+.book_instance{
+  @include flex(column, center, space-between);
+}
+
+.book_info{
+  @include flex(row, center, flex-start);
+  min-height: 180px;
+}
+
+.book_datapoints{
+  margin-left: 15px;
+}
+
+.invis_small{
+  display: none;
+}
+
+@media screen and (min-width: 767px){
+
+  .book_instance{
+    max-width: 400px;
+    width: 100%;
+    padding: 15px;
+    margin: 10px;
+    background-color: #db4c4c;
+    color: $bg-color;
+  }
+  .invis_small{
+    display: block;
+  }
 }

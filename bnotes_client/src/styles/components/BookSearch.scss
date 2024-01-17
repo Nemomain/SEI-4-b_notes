@@ -4,6 +4,11 @@ img, .fake_cover{
   margin-right: 15px;
 }
 
+.book_display{
+  @include flex(row, center, space-between);
+  width: 80%;
+}
+
 .fake_cover{
   @include flex(column, center, center);
   text-align: center;
@@ -37,6 +42,18 @@ img, .fake_cover{
   margin: 15px;
 }
 
+.description{
+  text-align: justify;
+}
+
 .bold{
   font-weight: 800;
 }
+
+@media screen and (min-width: 767px){
+  .search_wrapper{
+    width: 80%;
+    max-width: 1200px;
+  }
+}
+

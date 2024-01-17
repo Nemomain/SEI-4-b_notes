@@ -18,7 +18,6 @@ export async function getBookSingle(bookId) { //!loader
   try {
     const userData = JSON.parse(sessionStorage.getItem('data'));
     const token = userData.token;
-    console.log(token)
     const res = await axios.get(`/api/books/${bookId}/`, {
       headers: {
         Authorization: `Bearer ${token}`,

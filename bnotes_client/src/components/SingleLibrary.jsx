@@ -51,30 +51,32 @@ export default function SingleLibrary(){
         <button className="add_lib" onClick={openModal} >Add Book</button>
         <BookModal showBookModal={showBookModal} setShowBookModal={setShowBookModal} userData={userData} bookToLibrary={bookToLibrary} />
         <NoteModal showNoteModal={showNoteModal} setShowNoteModal={setShowNoteModal} userData={userData} noteToBook={noteToBook} />
+        <div className="listing">
         {bookList.length > 0 ?
         bookList.map((book) => (
           <section key={book.id} className="book_instance">
-            <div className="book_info">
+            <div className="book_info" onClick={() => navigate(`/${userData.id}/book/${book.id}`)}>
               {book.cover === 'Not Available' ?
-              <div className="fake_cover">
+              <div className="fake_cover invis_small" >
                 <p>No cover available</p>
               </div>
               :
-              <img src={book.cover} alt={`Cover for ${book.name} by ${book.author}`} />}
+              <img src={book.cover} alt={`Cover for ${book.name} by ${book.author}`} className="invis_small" />}
               <div className="book_datapoints">
-                <p>{`Title: ${book.name}`}</p>
-                <p>{`Author: ${book.author}`}</p>
-                <p>{`Notes: ${book.notes.length}`}</p>
+                <p><span className="bold">Title: </span>{`${book.name}`}</p>
+                <p><span className="bold">Author: </span>{`${book.author}`}</p>
+                <p><span className="bold">Notes: </span>{`${book.notes.length}`}</p>
               </div>
-              <div className="book_buttons">
-                <button className="add_book" onClick={() => openNoteModal(book.id)}>Add Note</button>
-              </div>
+            </div>
+            <div className="book_buttons">
+              <button className="add_book" onClick={() => openNoteModal(book.id)}>Add Note</button>
             </div>
           </section>
         ))
         :
         <p>No Books Yet</p>
         }
+      </div>
       </div>
     </>
   )
