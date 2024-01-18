@@ -25,7 +25,12 @@ class BookListCreateView(UserIdListCreateAPIView):
 class BookRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
   queryset = Book.objects.all()
   permission_classes = [IsAuthenticatedOrReadOnly]
-  serializer_class = BookSerializer
+  
+  def get_serializer_class(self):
+    if self.request.method == 'GET':
+      return BookSerializerPopulated
+    else:
+      return BookSerializer
 
 class BookLibraryRelations(RetrieveUpdateAPIView):
   queryset = Book.objects.all()
@@ -37,12 +42,15 @@ class BookLibraryRelations(RetrieveUpdateAPIView):
     else:
       return BookSerializer
 
-  def get(self, request, pk, lib):
+  def get(self, request, lib):
     queryset = Book.objects.filter(libraries_id=lib)
-    serializer = self.serializer_class(queryset, many=True)
-    return Response(serializer.data)
+    data = BookSerializerPopulated(queryset, many=True)
+    #* I had to change this after implementing the PATCH because something broke, however the code below is the regular way of coding this
+    # serializer = self.serializer_class(queryset, many=True)
+    # return Response(serializer.data)
+    return Response(data.data)
   
-  def patch(self, request, pk, lib): #! Implement in frontend!!!
+  def patch(self, request, pk, lib):
     book = Book.objects.get(pk=pk)
 
     if any(lib == library.id for library in book.libraries_id.all()):

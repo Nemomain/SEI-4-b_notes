@@ -5,11 +5,28 @@
 .logo{
   font-size: 6em;
   text-shadow: 0 8px #1207074d;
+  width: 6ch;
+  animation: typing .6s steps(6), blink .5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 8px solid;
 }
 .homeselect {
   font-size: 3em;
   margin: 15px;
   &:hover{
     color: $fhover;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+    
+@keyframes blink {
+  50% {
+    border-color: transparent
   }
 }

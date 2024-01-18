@@ -1,0 +1,29 @@
+
+.option_wrap{
+  @include flex(column, center, center);
+  padding: 15px;
+}
+
+.exit_placer{
+  width: 100%;
+  @include flex(row, center, flex-start);
+}
+
+.lib_include, .lib_exclude{
+  border-radius: 5px;
+  width: 300px;
+  height: 50px;
+  @include flex(row, flex-end, center);
+  text-align: center;
+  margin: 15px;
+}
+
+.lib_include{
+  background-color: rgb(159, 230, 159);
+  color: $font-color;
+}
+
+.lib_exclude{
+  background-color: $fhover;
+  color: white;
+}

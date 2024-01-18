@@ -19,7 +19,7 @@ function App() {
       navigation.state === 'idle' ?
       <Outlet context={[userData, setUserData]} />
       :
-      <div className='centered'>
+      <div className='centerer'>
         <Spinner animation='border' />
       </div>
       }

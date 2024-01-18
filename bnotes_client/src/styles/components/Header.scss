@@ -1,0 +1,20 @@
+header{
+  background-color: $bg-color;
+  color: $font-color;
+  box-shadow: 0 8px 10px 0 $font-color;
+  margin-bottom: 15px;
+}
+
+.navbar{
+  padding: 40px 0;
+  width: 100%;
+  margin: auto;
+  max-width: 1200px;
+}
+
+.toggle{
+  border-color: $font-color;
+}
+.navbar-toggler{
+  color: $font-color;
+}

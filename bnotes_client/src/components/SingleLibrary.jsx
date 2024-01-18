@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react"
 import { useLoaderData, useOutletContext, useNavigate } from "react-router-dom"
 
+import { Spinner } from 'react-bootstrap'
+
 
 import BookModal from "./BookModal"
 import NoteModal from "./NoteModal"
@@ -23,6 +25,7 @@ export default function SingleLibrary(){
   const [bookToLibrary, setBookToLibrary] = useState('')
   const [noteToBook, setNoteToBook] = useState('')
   const [bookList, setBookList] = useState([])
+  const [spinnerControl, setSpinnerControl] = useState(true)
 
   const navigate = useNavigate()
 
@@ -38,6 +41,7 @@ export default function SingleLibrary(){
   useEffect(() => {
     async function setup(){
       setBookList(await bookLibraryList(userData.token, libraryData.id))
+      setSpinnerControl(false)
     }
     setup()
     setBookToLibrary(libraryData.id)
@@ -74,7 +78,10 @@ export default function SingleLibrary(){
           </section>
         ))
         :
-        <p>No Books Yet</p>
+        spinnerControl ? 
+          <Spinner animation='border' />
+          :
+          <p>No Books Yet</p>
         }
       </div>
       </div>

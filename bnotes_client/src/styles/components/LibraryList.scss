@@ -20,7 +20,8 @@ h2{
 }
 
 .lib_info{
-  height: 100%;
+  min-height: 130px;
+  width: calc(100% - 132px);
   @include flex(column, center, center);
 }
 
@@ -52,6 +53,7 @@ h2{
   color: $bg-color;
   border: 1px solid $bg-color;
   margin-bottom: 10px;
+  max-width: 150px;
   &:hover{
     border: 1px solid $font-color;
     background-color: $bg-color;

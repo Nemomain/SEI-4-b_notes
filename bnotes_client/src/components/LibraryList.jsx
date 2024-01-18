@@ -4,6 +4,7 @@ import { useOutletContext } from "react-router-dom"
 import { useNavigate } from 'react-router-dom'
 import { libraryLister } from '../utils/helpers/libraryHelpers'
 import { bookLibraryList } from '../utils/helpers/bookHelpers'
+import { Spinner } from 'react-bootstrap'
 
 
 import Header from './Header'
@@ -24,6 +25,7 @@ export default function LibraryList(){
   const [actualLibraryName, setActualLibraryName] = useState('')
   // For book counting in the sections
   const [bookCounting, setBookCounting] = useState([])
+  const [spinnerControl, setSpinnerControl] = useState(true)
 
   const data = useOutletContext()
   const [ userData, setUserData ] = data
@@ -42,7 +44,7 @@ export default function LibraryList(){
 
   function openRename(name, id){
     setActualLibraryName(name)
-    // bookToLibrary always represents a Library Id so I reuse it
+    // bookToLibrary always represents a Library Id so it's reused
     setBookToLibrary(id)
     setShowRenameModal(true)
   }
@@ -55,6 +57,7 @@ export default function LibraryList(){
   useEffect(() => {
     async function fetchData(){
       setList(await libraryLister(userData.token))
+      setSpinnerControl(false)
     }
     fetchData()
   }, [])
@@ -92,6 +95,9 @@ export default function LibraryList(){
               </div>
             </section>
           ))
+          :
+          spinnerControl ? 
+          <Spinner animation='border' />
           :
           <p>No libraries yet</p>
           }

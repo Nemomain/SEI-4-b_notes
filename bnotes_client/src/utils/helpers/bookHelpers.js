@@ -1,6 +1,7 @@
 
 import axios from "axios"
 
+// CREATE
 export async function bookCreate(token, parsedData) {
   try {
     const res = await axios.post('/api/books/', parsedData, {
@@ -14,6 +15,7 @@ export async function bookCreate(token, parsedData) {
   }
 }
 
+// GET SINGLE
 export async function getBookSingle(bookId) { //!loader
   try {
     const userData = JSON.parse(sessionStorage.getItem('data'));
@@ -29,9 +31,23 @@ export async function getBookSingle(bookId) { //!loader
   }
 }
 
+// LIST FROM LIBRARY
 export async function bookLibraryList(token, libraryId) {
   try {
-    const res = await axios.get(`/api/books/1/${libraryId}/`, {
+    const res = await axios.get(`/api/books/library/${libraryId}/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function bookPatchLibrary(token, bookId, libraryId) {
+  try {
+    const res = await axios.patch(`/api/books/modlibrary/${bookId}/${libraryId}/`, {}, { //since its a patch, it needs some kind of data even if its an empty object
       headers: {
         Authorization: `Bearer ${token}`,
       },

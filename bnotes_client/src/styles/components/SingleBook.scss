@@ -15,7 +15,16 @@
   margin: 10px;
 }
 
+.two_buttons{
+  @include flex(column, center, space-between);
+}
+
+.many_button{
+  margin: 0 10px;
+}
+
 .notes_list{
+  @include flex(column, center, center);
   width: 100%;
 }
 
@@ -24,6 +33,7 @@
   border: 1px solid $fhover;
   border-radius: 10px;
   margin: 15px 0;
+  width: 100%;
 }
 
 .note_title{
@@ -92,11 +102,21 @@
   border-radius: 0 0 9px 9px;
 }
 
+@media screen and (min-width: 400px){
+  .two_buttons{
+    @include flex(row, center, center);
+  }
+}
+
 
 @media screen and (min-width: 767px){
 
   .row{
     @include flex(column, center, center);
+  }
+
+  .many_button{
+    margin: 0 30px;
   }
 
   .book_hero{

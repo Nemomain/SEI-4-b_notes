@@ -12,6 +12,11 @@ body {
   color: $font-color;
 }
 
+.centerer{
+  @include flex(column, center, center);
+  height: 100vh;
+}
+
 .reg_confirm{
   background-color: rgb(159, 230, 159);
   border-radius: 5px;

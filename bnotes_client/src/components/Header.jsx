@@ -25,9 +25,9 @@ export default function Header({ userData, setUserData }){
 
   return (
     <header className="head">
-      <Navbar className="pe-5 ps-5" expand="lg" style={{padding: '40px 0', width: '100%', margin: 'auto', maxWidth: '1200px'}}>
+      <Navbar className="pe-5 ps-5 navbar" expand="lg" >
         <h1 id='nav_title' style={{fontSize: 70}}>b_notes</h1>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" style={{borderColor: '#682B2B'}} onClick={toggleVisible} />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className='toggle' onClick={toggleVisible} />
         <Navbar.Collapse className={visible ? 'show' : ''}>
           <Nav style={{ marginLeft: 'auto' }}>
             <Nav.Link className='nav_link' style={{color: '#682B2B', marginLeft: 'auto'}} href={`/${userData.id}/`}>Libraries</Nav.Link>
