@@ -37,7 +37,7 @@ export default function BookLibraryManagerModal({bookData, showManager, setShowM
   useEffect(() => {
     const tally = {included: [], notIncluded: []}
     const mapper = list.data
-    //this line is to avoid doing anything on first render, and wait for list to be defined
+    //this line is to avoid doing anything on first render, and wait for list to be called from API
     if (mapper) {
       // we map over the list of libraries
       mapper.map((lib) => {

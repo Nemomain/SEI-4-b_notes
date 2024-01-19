@@ -87,7 +87,7 @@ export default function SingleBook(){
                 </div>
                 <div className="note_buttons">
                   <button className="delete-note" onClick={() => deleteNote(note.id)}>Delete Note</button>
-                  <button className="edit_text" onClick={() => openModal(note.id, 'text', note.text)}>Edit</button>
+                  <button className="edit_title" onClick={() => openModal(note.id, 'text', note.text)}>Edit</button>
                 </div>
               </section>
             ))

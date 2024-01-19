@@ -37,7 +37,7 @@ export default function DynamicNoteModal({ noteToMod, whichField, fieldValue, sh
           <button className='exit' onClick={exit}>x</button>
           <div>
             {
-              <form className="form" action="" onSubmit={(e) => validate(e)}>
+              <form className="note_form" action="" onSubmit={(e) => validate(e)}>
                 {whichField == 'title' ?
                 <label>
                   Edit your note title:
@@ -51,6 +51,7 @@ export default function DynamicNoteModal({ noteToMod, whichField, fieldValue, sh
                     rows={12}
                     cols={37}
                     defaultValue={fieldValue}
+                    className='textarea'
                     />
                 </label>
                 }

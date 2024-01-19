@@ -26,11 +26,12 @@
 .notes_list{
   @include flex(column, center, center);
   width: 100%;
+  padding: 0;
 }
 
 .note_instance{
   @include flex(column, center, center);
-  border: 1px solid $fhover;
+  border: 1px solid $note;
   border-radius: 10px;
   margin: 15px 0;
   width: 100%;
@@ -40,7 +41,7 @@
   @include flex(row, center, space-between);
   width: 100%;
   border-radius: 9px 9px 0 0;
-  background-color: $fhover;
+  background-color: $note;
   color: $bg-color;
   padding: 5px 15px;
   font-weight: 800;
@@ -59,7 +60,7 @@
 .edit_title{
   background-color: $font-color;
   color: $bg-color;
-  border: 1px solid $bg-color;
+  border: 1px solid $note;
   margin: 5px 0;
   border-radius: 4px;
   &:hover{
@@ -98,7 +99,7 @@
   @include flex(row, center, space-around);
   width: 100%;
   padding: 20px;
-  background-color: rgb(211, 157, 157);
+  background-color: #4aab989b;
   border-radius: 0 0 9px 9px;
 }
 

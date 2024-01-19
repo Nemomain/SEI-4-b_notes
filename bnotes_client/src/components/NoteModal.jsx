@@ -47,7 +47,7 @@ export default function NoteModal({ showNoteModal, setShowNoteModal, userData, n
           <button className='exit' onClick={exit}>x</button>
           <div>
             {
-              <form className="form" action="" onSubmit={(e) => validate(e)}>
+              <form className="note_form" action="" onSubmit={(e) => validate(e)}>
                 <input className="textinput" type="text" name="title" placeholder="Note Title" />
                 <label>
                   Write your note:
@@ -55,6 +55,7 @@ export default function NoteModal({ showNoteModal, setShowNoteModal, userData, n
                     name="text"
                     rows={12}
                     cols={37}
+                    className='textarea'
                   />
                 </label>
                 <input type="hidden" name="book" value={noteToBook} />

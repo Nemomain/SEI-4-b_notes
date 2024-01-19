@@ -14,7 +14,7 @@
 }
 
 .form_modal{
-  @include flex(row, flex-start, center);
+  @include flex(column, flex-start, center);
 }
 
 .exit, .submit{
@@ -70,4 +70,12 @@ select{
   color: $font-color;
   border: none;
   box-shadow: 0 2px 0 $font-color;
+}
+
+.note_form{
+  @include flex(column, flex-start, center);
+}
+
+.textarea{
+  width: 100%;
 }
