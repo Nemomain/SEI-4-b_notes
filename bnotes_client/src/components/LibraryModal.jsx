@@ -17,9 +17,14 @@ export default function HomeModal({ list, setList, show, setShow, userData, setU
     e.preventDefault()
     const formData = new FormData(e.target)
     const parsedData = Object.fromEntries(formData.entries())
-    !parsedData.name ? setNoBueno('Your new Library needs a name!') : await libraryCreate(userData.token, parsedData)
-    const updatedList = await libraryLister(userData.token);
-    setList(updatedList)
+    if (!parsedData.name){
+      setNoBueno('Your new Library needs a name!')
+    } else {
+      await libraryCreate(userData.token, parsedData)
+    } 
+    navigate(`/${userData.id}`)
+    // const updatedList = await libraryLister(userData.token);
+    // setList(updatedList)
   }
   
   function exit(){
