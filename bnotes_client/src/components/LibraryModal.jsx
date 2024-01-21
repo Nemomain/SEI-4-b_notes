@@ -22,7 +22,7 @@ export default function HomeModal({ list, setList, show, setShow, userData, setU
     } else {
       await libraryCreate(userData.token, parsedData)
     } 
-    navigate(`/${userData.id}`)
+    navigate(`/${userData.id}/`)
     // const updatedList = await libraryLister(userData.token);
     // setList(updatedList)
   }
