@@ -10,7 +10,7 @@ import { libraryCreate } from "../utils/helpers/libraryHelpers";
 export default function HomeModal({ list, setList, show, setShow, userData, setUserData }) {
 
   const [ noBueno, setNoBueno ] = useState('')
-  const navigate = useNavigate
+  const navigate = useNavigate()
 
   //validate function validates the user has written in the field and if so, generates the api request to create library, and updates local library list
   async function validate(e) {
