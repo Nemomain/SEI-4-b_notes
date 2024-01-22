@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 
 import Modal from 'react-bootstrap/Modal'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 
 import { libraryCreate, libraryLister } from "../utils/helpers/libraryHelpers";
 
@@ -10,7 +10,11 @@ import { libraryCreate, libraryLister } from "../utils/helpers/libraryHelpers";
 export default function HomeModal({ list, setList, show, setShow, userData, setUserData }) {
 
   const [ noBueno, setNoBueno ] = useState('')
-  const navigate = useNavigate()
+
+  function exit(){
+    setNoBueno('')
+    setShow(false)
+  }
 
   //validate function validates the user has written in the field and if so, generates the api request to create library, and updates local library list
   async function validate(e) {
@@ -20,17 +24,13 @@ export default function HomeModal({ list, setList, show, setShow, userData, setU
     if (!parsedData.name){
       setNoBueno('Your new Library needs a name!')
     } else {
-      await libraryCreate(userData.token, parsedData)
+      const newLibrary = await libraryCreate(userData.token, parsedData)
+      const updatedList = await libraryLister(userData.token);
+      setList(updatedList)
+      exit()
     } 
-    navigate(`/${userData.id}/`)
-    // const updatedList = await libraryLister(userData.token);
-    // setList(updatedList)
   }
   
-  function exit(){
-    setNoBueno('')
-    setShow(false)
-  }
 
   return (
     <Modal centered show={show}>
