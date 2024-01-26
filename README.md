@@ -1,6 +1,6 @@
 # b_notes(General Assembly SEI Project 4)
 
-[bNotes]: https://b-notes-0900296b98d5.herokuapp.com//
+[bNotes]: https://b-notes-0900296b98d5.herokuapp.com
 [githubrepo]: https://github.com/Nemomain/SEI-4-b_notes
 
 ## Timeframe
