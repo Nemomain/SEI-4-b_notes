@@ -4,9 +4,11 @@
 [githubrepo]: https://github.com/Nemomain/SEI-4-b_notes
 
 ## Timeframe
+
 7 days, worked by myself.
 
 ## Technologies used
+
 * React / JavaScript
 * React Router DOM
 * HTML5
@@ -36,6 +38,7 @@
 <!-- links where to find -->
 
 ## Project Description
+
 The only thing I knew from the start is that I wanted to do something useful, no matter how marginally, to me or the people around me. 
 
 b_notes started when I realised that I know a lot of readers, and some didn’t take notes on the pages of their books to not ruin them, so I knew that building an app for readers who want to take notes elsewhere might be a good idea.
@@ -74,6 +77,7 @@ You might have to also define your own env variables!
 
 
 ## Project briefing
+
 The brief we were handed specified the following:
 
 ```
@@ -154,10 +158,12 @@ You must:
 
 
 ## Sign Off Requirements
-* Basic wireframs for front end product
+* Basic wireframes for front end product
+* An ERD diagram for your database tables/relationships
 ```
 
 ## Project Planning
+
 I provided a wireframe of the App:
 
 <img src="bnotes_client/public/WF.png">
@@ -171,6 +177,7 @@ To be honest I had a very clear idea of what the structure and parts of the appl
 I also designed it with the idea that it was to be practical for mobile first, and so responsiveness came from the get-go.
 
 ## Coding/Building Process
+
 At first I created the whole Backend using django generics and defined the paths, views, and serializers I knew for sure I was going to need, and tested them in insomnia to see if they worked as intended.
 
 Once that was sorted I started with the Frontend and my method was pretty easy to understand if you have seen the wireframe. I started with the Homepage(Login, Register), the LibraryList page and progressively got “deeper” once a section worked.
@@ -278,8 +285,9 @@ All in all looking at the individual components and pages of code, it seems simp
 It’s been a journey, and a very fun one.
 
 
-## Wins and Challenges(TLDR)
-This has probably been my least troubled project so far, with only a couple of road bumps worth mentioning.
+## Wins and Challenges
+
+This has probably been the project where I faced the least challenges so far, with only a couple of road bumps worth mentioning.
 
 The first one was due to a misunderstanding as to how paths in React Router Dom work:
 
@@ -325,7 +333,7 @@ const router = createBrowserRouter([
 ])
 ```
 
-The second problem with mentioning  was on the backend, when specifying “def patch”:
+The second problem worth mentioning was on the backend, when specifying “def patch”:
 
 <img src="bnotes_client/public/prob2.png">
 
@@ -347,11 +355,80 @@ The issue came up because the field “libraries_id” was meant to be an array 
 
 However once fixed, it broke other HTTP methods using that same endpoint, but that was a way easier fix.
 
+I would consider my wins to be that I actually achieved all the strectch goals I believe were even possible within the timeframe. I am also very happy that I have made a service which is going to be used - At the very least, by me!
+
+## Key Learnings/Takeaways
+
+BookLibraryManagerModal was a blast to code. It was one of the stretch goals i had set for myself, so its inclusion wasn’t really guaranteed, but I’m glad it made it in, particularly:
+
+```javascript
+  useEffect(() => {
+    const tally = {included: [], notIncluded: []}
+    const mapper = list.data
+    //this line is to avoid doing anything on first render, and wait for list to be called from API
+    if (mapper) {
+      // we map over the list of libraries
+      mapper.map((lib) => {
+        // we check if the library id is among the libraries included in our book
+        bookData.libraries_id.some((bookLib) => bookLib.id === lib.id) ?
+        // we organise the data in two arrays
+        tally.included.push(lib) : tally.notIncluded.push(lib)
+      })
+      setLibraryTally(tally)
+    }
+    
+  }, [list])
+```
+And the conditional rendering:
+
+```javascript
+   <Modal centered show={showManager}>
+      <div className="outer_modal">
+      {noBueno && <div className="disclaimer"><p>{noBueno}</p></div>}
+      <div className="option_wrap">
+        <div className='exit_placer'>
+          <button className='exit' onClick={exit}>x</button>
+        </div>
+        {libraryTally ?
+        <div>
+          <div>
+            {libraryTally.notIncluded.length > 0 && (
+              <>
+                <p>Select a Library to add this Book to it</p>
+                {libraryTally.notIncluded.map((lib) => (
+                  <article className='lib_include' key={lib.id} onClick={() => modify(lib.id)}>
+                    <p>{lib.name}</p>
+                  </article>
+                ))}
+              </>
+            )}
+          </div>
+          <div>
+            {libraryTally.included.length > 1 && (
+              <>
+                <p>Select a Library to remove the Book from it</p>
+                {libraryTally.included.map((lib) => (
+                  <article className='lib_exclude' key={lib.id} onClick={() => modify(lib.id)}>
+                    <p>{lib.name}</p>
+                  </article>
+                ))}
+              </>
+            )}
+          </div>
+        </div>
+        :
+        <Spinner animation='border' />}
+      </div>
+      </div>
+    </Modal>
+```
 
 ## Bugs
+
 There are currently no bugs that I am aware of, if you happen to come across one, I would appreciate you sending me a message (Project “About” page has links to my Github and LinkedIn) explaining what happened, and error messages, screenshots, etc… would be very much appreciated.
 
 ## Future Improvements/Other considerations
+
 I have some ideas to implement in the future, including aggregating notes by topic e.g. Characters, Concepts, Pages etc… and then display them in collapsible sections by topic. The Note Model already has a field to specify it, so it would mostly be a job on the Frontend.
 
 Also, I believe some of the UX can be polished.
